@@ -1,4 +1,4 @@
-import { runWithOwner, Suspense } from "solid-js";
+import { createRoot, onCleanup, runWithOwner, Suspense } from "solid-js";
 import { create_self } from "./create_self.js";
 import { Dynamic } from "solid-js/web";
 import { ClientOnly } from "@tanstack/solid-router";
@@ -8,15 +8,17 @@ export const obtain_component = (render) => {
 		const self = create_self();
 
 		const [get_create_instance] = self.create_resource(() => {
-			console.log("got here...");
 			return runWithOwner(self.owner, async () => {
-				console.log("rendering");
 				return await render({
 					...props,
 					self,
 				});
 			});
 		});
+
+		let dispose;
+
+		onCleanup(() => dispose?.());
 
 		return <>
 			<Suspense fallback={<>
@@ -25,21 +27,23 @@ export const obtain_component = (render) => {
 				</div>
 			</>}>
 				{(() => {
-					console.log("blah");
 					const create_instance = get_create_instance();
-
-					console.log(create_instance, "cri");
 
 					if (create_instance === undefined) {
 						console.warn("Invalid instance factory", create_instance);
 						return <></>;
 					}
 
-					const instance = create_instance();
+					return createRoot((_dispose) => {
+						dispose?.();
+						dispose = _dispose;
 
-					return <>
-						<Dynamic component={() => instance} />
-					</>;
+						const instance = create_instance();
+
+						return <>
+							<Dynamic component={() => instance} />
+						</>;
+					});
 				})()}
 			</Suspense >
 		</>;
