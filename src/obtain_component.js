@@ -3,16 +3,30 @@ import { create_self } from "./create_self.js";
 import { Dynamic } from "solid-js/web";
 import { ClientOnly } from "@tanstack/solid-router";
 
+const Error = () => <>
+	<div class="GLOBAL_loader_wrapper">
+		<p className="px-3 py-1 bg-red-200 border border-red-600 m-4"> Uncaught error </p>
+	</div>
+</>;
+
 export const obtain_component = (render) => {
 	const Component = (props) => {
 		const self = create_self();
 
 		const [get_create_instance] = self.create_resource(() => {
 			return runWithOwner(self.owner, async () => {
-				return await render({
-					...props,
-					self,
-				});
+				try {
+					return await render({
+						...props,
+						self,
+					});
+				} catch (e) {
+					console.error("Uncaught error while rendering component", e);
+
+					return <>
+						<Error />
+					</>;
+				}
 			});
 		});
 
@@ -38,7 +52,15 @@ export const obtain_component = (render) => {
 						dispose?.();
 						dispose = _dispose;
 
-						const instance = create_instance();
+						try {
+							var instance = create_instance();
+						} catch (e) {
+							console.error("Uncaught error while obtaining component", e);
+
+							return <>
+								<Error />
+							</>;
+						}
 
 						return <>
 							<Dynamic component={() => instance} />
