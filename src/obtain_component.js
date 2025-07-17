@@ -5,7 +5,7 @@ import { ClientOnly } from "@tanstack/solid-router";
 
 const Error = () => <>
 	<div class="GLOBAL_loader_wrapper">
-		<p className="px-3 py-1 bg-red-200 border border-red-600 m-4"> Uncaught error </p>
+		<p class="px-3 py-1 bg-red-200 border border-red-600 m-4"> Uncaught error </p>
 	</div>
 </>;
 

@@ -9,7 +9,7 @@ const Counter = obtain_component(async ({ self, ...props }) => {
 
 	return () => <>
 		<h1> Count: {count()} </h1>
-		<button className="bg-green-300 hover:bg-green-400 px-2 border border-blue-700 rounded-md" onClick={() => count.set(count() + 1)}>Increment</button>
+		<button class="bg-green-300 hover:bg-green-400 px-2 border border-blue-700 rounded-md" onClick={() => count.set(count() + 1)}>Increment</button>
 	</>;
 });
 
