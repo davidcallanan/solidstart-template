@@ -71,7 +71,7 @@ export const obtain_component = (render) => {
 		</>;
 	};
 
-	return <>
+	return () => <>
 		<ClientOnly fallback={<>
 			<div class="GLOBAL_loader_wrapper">
 				<span class="GLOBAL_loader" />
