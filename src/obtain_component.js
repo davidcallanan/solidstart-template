@@ -10,7 +10,7 @@ const Error = () => <>
 </>;
 
 export const obtain_component = (render) => {
-	const Component = (props) => {
+	const Component = ({ props }) => {
 		const self = create_self();
 
 		const [get_create_instance] = self.create_resource(() => {
@@ -71,13 +71,13 @@ export const obtain_component = (render) => {
 		</>;
 	};
 
-	return () => <>
+	return (props) => <>
 		<ClientOnly fallback={<>
 			<div class="GLOBAL_loader_wrapper">
 				<span class="GLOBAL_loader" />
 			</div>
 		</>}>
-			<Component />
+			<Component props={props} />
 		</ClientOnly>
 	</>;
 };
