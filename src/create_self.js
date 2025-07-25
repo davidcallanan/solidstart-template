@@ -1,5 +1,6 @@
 import {
 	createResource,
+	createEffect,
 	getOwner,
 	runWithOwner,
 } from "solid-js";
@@ -25,5 +26,6 @@ export const create_self = (owner) => {
 		owner,
 		create_signal: wrap(create_signal),
 		create_resource: wrap(createResource),
+		create_effect: wrap(createEffect),
 	};
 };
