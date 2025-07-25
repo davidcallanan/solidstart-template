@@ -17,14 +17,15 @@
 		"@trpc/client": "^10.45.2",
 		"@trpc/server": "^10.45.2",
 		"@typeschema/valibot": "^0.13.4",
-		"valibot": "^0.29.0",
+		"clsx": "^2.1.1",
 		"solid-js": "^1.9.5",
 		"unsuspended-promise": "^1.0.1",
+		"valibot": "^0.29.0",
 		"vinxi": "^0.5.7"
 	},
 	"devDependencies": {
-		"tailwindcss": "^4.1.11",
-		"@tailwindcss/vite": "^4.1.11"
+		"@tailwindcss/vite": "^4.1.11",
+		"tailwindcss": "^4.1.11"
 	},
 	"engines": {
 		"node": ">=22"

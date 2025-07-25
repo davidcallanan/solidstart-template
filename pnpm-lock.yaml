@@ -35,6 +35,9 @@ importers:
       '@typeschema/valibot':
         specifier: ^0.13.4
         version: 0.13.5(valibot@0.29.0)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       solid-js:
         specifier: ^1.9.5
         version: 1.9.7
